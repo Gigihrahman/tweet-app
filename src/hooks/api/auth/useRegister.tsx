@@ -2,6 +2,7 @@ import { axiosInstance } from "@/lib/axios";
 import { useMutation } from "@tanstack/react-query";
 import { type AxiosError } from "axios";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 interface Payload {
   firstName: string;
@@ -22,11 +23,11 @@ const useRegister = () => {
       });
     },
     onSuccess: () => {
-      alert("Register berhasil");
+      toast.success("Register Success");
       router.push("/login");
     },
     onError: (error: AxiosError<{ message: string; code: number }>) => {
-      alert(error.response?.data.message);
+      toast.error(error.response?.data.message);
     },
   });
 };
